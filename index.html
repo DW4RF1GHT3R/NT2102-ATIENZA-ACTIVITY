@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="LightGuard - Smart Classroom Lighting Monitoring and Energy-Saving System for Educational Institutions.">
     <title>LightGuard | Smart Classroom Lighting & Energy Saving</title>
+    <script>
+        if (!sessionStorage.getItem("loggedInUsername")) {
+            window.location.replace("login.html");
+        }
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -277,6 +282,7 @@
                         <span class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill font-weight-bold">
                             <i class="fa-solid fa-bolt me-1"></i> Smart Campus IoT
                         </span>
+                        <p id="welcome-message" class="hero-lead mb-3" hidden></p>
                         <h1 class="hero-title mb-3">Smart Classroom Lighting & Energy Management</h1>
                         <p class="hero-lead mb-4">
                             Monitor occupancy, track light levels, and prevent wasted electricity across campus in real time with our automated IoT sensor network.
@@ -512,6 +518,13 @@
     
     <!-- auto close menu after clicking buttons -->
     <script>
+        const username = sessionStorage.getItem("loggedInUsername");
+        if (username) {
+            const welcomeMessage = document.getElementById("welcome-message");
+            welcomeMessage.textContent = `Welcome, ${username}!`;
+            welcomeMessage.hidden = false;
+        }
+
         document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 const navbarCollapse = document.getElementById('navmenu');

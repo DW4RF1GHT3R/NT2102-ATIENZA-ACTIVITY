@@ -280,6 +280,7 @@
                     const password = $("#login-pass").val();
                 // Demo account credentials for testing
                     if (username === "lygus" && password === "zandar1kuwabara!") {
+                        sessionStorage.setItem("loggedInUsername", username);
                         window.location.href = "index.html";
                     } else {
                         alert("Invalid username or password.");

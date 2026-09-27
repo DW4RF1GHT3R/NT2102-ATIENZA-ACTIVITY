@@ -101,6 +101,13 @@
             font-size: 12px;
         }
 
+        .success-message {
+            margin-top: 12px;
+            color: #c9ffdf;
+            text-align: center;
+            font-size: 13px;
+        }
+
         input.validation-error {
             border-color: #ff8f8f;
         }
@@ -244,6 +251,7 @@
             </div>
 
             <button type="submit" class="submit-btn">Register</button>
+            <p id="registration-feedback" class="success-message" role="status" aria-live="polite" hidden></p>
 
             <div class="form-footer">
                 <span>Already have an account?</span><a href="login.html">Login Here</a>
@@ -342,7 +350,13 @@
                     error.appendTo(element.closest(".input-group"));
                 },
                 errorElement: "small",
-                errorClass: "validation-error"
+                errorClass: "validation-error",
+                submitHandler: function () {
+                    const feedback = document.getElementById("registration-feedback");
+                    feedback.textContent = "Registration successful! You can now log in.";
+                    feedback.hidden = false;
+                    return false;
+                }
             });
         });
     </script>
