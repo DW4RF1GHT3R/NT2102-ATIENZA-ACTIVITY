@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Account Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* background layout */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), 
+                              url('https://static.wikia.nocookie.net/houkai-star-rail/images/f/f6/Space_Anchor_Student_Dining_Area.png/revision/latest?cb=20260215175631');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* glass card container */
+        .form-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 35px 30px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+        }
+
+        /* header style */
+        .form-card h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* form icon and field styles */
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+
+        /* input fields position */
+        .input-field {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            outline: none;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .input-field input::placeholder {
+            color: #cccccc;
+        }
+
+        .input-field input:focus {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #ffffff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        }
+
+        .validation-error {
+            display: block;
+            margin-top: 6px;
+            color: #ffd1d1;
+            font-size: 12px;
+        }
+
+        input.validation-error {
+            border-color: #ff8f8f;
+        }
+
+        .input-field i {
+            position: absolute;
+            left: 14px;
+            color: #dddddd;
+            font-size: 15px;
+        }
+
+        /* submit button */
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 10px;
+            background: #ffffff;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: #e6e6e6;
+            transform: translateY(-2px);
+        }
+
+        /* footer link */
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        .form-footer a {
+            color: #ffffff;
+            font-weight: 600;
+            text-decoration: underline;
+            margin-left: 5px;
+        }
+
+        .form-footer a:hover {
+            color: #dddddd;
+        }
+
+        /* mobile breakpoints */
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+
+            .form-card {
+                padding: 25px 20px;
+                border-radius: 12px;
+            }
+
+            .form-card h2 {
+                font-size: 24px;
+            }
+            
+            .input-field input {
+                padding: 10px 14px 10px 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="form-card">
+        <h2>Login</h2>
+        
+        <form id="login-form" action="#" method="POST" novalidate>
+            
+            <div class="input-group">
+                <label for="login-user">Username or Email</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="login-user" name="login_user" placeholder="Enter username or email" required>
+                </div>
+            </div>
+
+
+            <div class="input-group">
+                <label for="login-pass">Password</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="login-pass" name="login_pass" placeholder="Enter password" required>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Login</button>
+
+            <div class="form-footer">
+                <span>Don't have an account?</span><a href="register.html">Register Here</a>
+            </div>
+
+        </form>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.21.0/dist/jquery.validate.min.js"></script>
+    <script>
+        $(function () {
+            $("#login-form").validate({
+                rules: {
+                    login_user: { 
+                        required: true, 
+                        minlength: 3, 
+                        maxlength: 254 },
+                    login_pass: {   
+                        required: true,   
+                        minlength: 8,     
+                        maxlength: 32 
+                    }
+                },
+                
+                messages: {
+                    login_user: {
+                        required: "Please enter your username or email.",
+                        minlength: "Enter at least 3 characters.",
+                        maxlength: "Enter no more than 254 characters."
+                    },
+                    login_pass: {
+                        required: "Please enter your password.",
+                        minlength: "Password must be at least 8 characters.",
+                        maxlength: "Password cannot exceed 32 characters."
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    error.appendTo(element.closest(".input-group"));
+                },
+                errorElement: "small",
+                errorClass: "validation-error"
+            });
+        });
+    </script>
+
+</body>
+</html>

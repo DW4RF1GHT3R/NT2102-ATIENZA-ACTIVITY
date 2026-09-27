@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LightGuard - Smart Classroom Lighting Monitoring and Energy-Saving System for Educational Institutions.">
+    <title>LightGuard | Smart Classroom Lighting & Energy Saving</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* root colors for unity */
+        :root {
+            --brand-primary: #008080;
+            --brand-primary-hover: #006666;
+            --brand-secondary: #0f172a;
+            --brand-accent: #0ea5e9;
+            --brand-bg-light: #f8fafc;
+        }
+
+        /* body main */
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #334155;
+            background-color: var(--brand-bg-light);
+            overflow-x: hidden;
+        }
+
+        /* navbar */
+        .navbar {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #ffffff !important;
+        }
+
+        .navbar-brand i {
+            color: #f59e0b;
+        }
+
+        .nav-link {
+            color: #cbd5e1 !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+        }
+
+        /* mobile hamburger css */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background-color: #0f172a;
+                padding: 20px;
+                border-radius: 12px;
+                margin-top: 10px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            }
+            .navbar-nav {
+                align-items: flex-start !important;
+            }
+            .nav-item {
+                width: 100%;
+                padding: 6px 0;
+            }
+        }
+
+        /* hero section */
+        .hero-section {
+            position: relative;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(0, 128, 128, 0.75)),
+                        url('https://static.wikia.nocookie.net/houkai-star-rail/images/0/04/Area_Graphia_Academy.png/revision/latest?cb=20260214161112') center/cover no-repeat;
+            padding: 140px 0 100px 0;
+            color: #ffffff;
+        }
+
+        .hero-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero-lead {
+            font-size: 1.15rem;
+            color: #e2e8f0;
+        }
+
+        /* primary buttons style */
+        .btn-brand-primary {
+            background-color: var(--brand-primary);
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 12px 28px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-brand-primary:hover {
+            background-color: var(--brand-primary-hover);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 128, 128, 0.4);
+        }
+
+        /* no outline buttons style */
+        .btn-brand-outline {
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 12px 28px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-brand-outline:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        /* objective cards */
+        .custom-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 30px 24px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+            border-color: var(--brand-primary);
+        }
+
+        .icon-box {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            background-color: rgba(0, 128, 128, 0.1);
+            color: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* dashboard mockup */
+        .preview-section {
+            background-color: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .dashboard-mockup {
+            background-color: var(--brand-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        .status-badge-occupied {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .status-badge-unoccupied {
+            background-color: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* --- client boxes --- */
+        .target-box {
+            background-color: #ffffff;
+            border-left: 4px solid var(--brand-primary);
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        /* --- footer --- */
+        footer {
+            background-color: var(--brand-secondary);
+            color: #94a3b8;
+            padding: 50px 0 30px 0;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+
+        /* --- mobile breakpoints --- */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 100px 0 60px 0;
+                text-align: center;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-btns {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- header and navbar  -->
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+            <div class="container">
+                <!-- logo brand link -->
+                <a class="navbar-brand" href="#">
+                    <i class="fa-solid fa-lightbulb me-2" aria-hidden="true"></i>LightGuard
+                </a>
+                
+                <!-- mobile hamburger menu button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <!-- navbar links -->
+                <div class="collapse navbar-collapse" id="navmenu">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a href="#objectives" class="nav-link">Objectives</a></li>
+                        <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+                        <li class="nav-item"><a href="#dashboard" class="nav-link">Live Preview</a></li>
+                        <li class="nav-item"><a href="#target" class="nav-link">Clients</a></li>
+                        <!-- login button-->
+                        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                            <a href="login.html" class="btn btn-brand-primary btn-sm px-3 py-2">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- main landing page -->
+    <main>
+        
+        <!-- Hero Section/1st Section -->
+        <section class="hero-section" id="hero">
+            <div class="container">
+                <div class="row align-items-center gy-4">
+                    <!-- Text and Buttons-->
+                    <div class="col-lg-7">
+                        <span class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill font-weight-bold">
+                            <i class="fa-solid fa-bolt me-1"></i> Smart Campus IoT
+                        </span>
+                        <h1 class="hero-title mb-3">Smart Classroom Lighting & Energy Management</h1>
+                        <p class="hero-lead mb-4">
+                            Monitor occupancy, track light levels, and prevent wasted electricity across campus in real time with our automated IoT sensor network.
+                        </p>
+                        <div class="hero-btns d-flex gap-3">
+                            <a href="#dashboard" class="btn btn-brand-primary">Explore Dashboard</a>
+                            <a href="#objectives" class="btn btn-brand-outline">Learn More</a>
+                        </div>
+                    </div>
+                    <!-- Right Side Image -->
+                    <div class="col-lg-5 text-center">
+                        <img src="https://upload-os-bbs.hoyolab.com/upload/2026/04/26/374228825/bdcab985f0a7e293d5ee32ad830e513a_1008396740440415399.webp?x-oss-process=image%2Fresize%2Cs_1000%2Fauto-orient%2C0%2Finterlace%2C1%2Fformat%2Cwebp%2Fquality%2Cq_70" 
+                             alt="Smart classroom technology overview" 
+                             class="img-fluid rounded-4 shadow-lg border border-2 border-secondary">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objectives section with cards   -->
+        <section class="py-5" id="objectives">
+            <div class="container py-4">
+                <!-- title header of the section -->
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold text-dark">System Objectives</h2>
+                    <p class="text-muted">Designed to optimize campus energy footprint through intelligent automation</p>
+                </div>
+                
+                <!-- 4 objective cards row-->
+                <div class="row g-4">
+                    <!-- Objective Card 1 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="custom-card text-center">
+                            <div class="icon-box mx-auto"><i class="fa-solid fa-microchip"></i></div>
+                            <h5 class="fw-bold fs-6">IoT Sensing</h5>
+                            <p class="text-muted small mb-0">Continuously track classroom occupancy and ambient brightness using integrated LDR sensors.</p>
+                        </div>
+                    </div>
+                    <!-- Objective Card 2 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="custom-card text-center">
+                            <div class="icon-box mx-auto"><i class="fa-solid fa-desktop"></i></div>
+                            <h5 class="fw-bold fs-6">Real-Time Web Hub</h5>
+                            <p class="text-muted small mb-0">Centralize live data across all campus buildings on a single, intuitive web portal.</p>
+                        </div>
+                    </div>
+                    <!-- Objective Card 3 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="custom-card text-center">
+                            <div class="icon-box mx-auto"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                            <h5 class="fw-bold fs-6">Waste Identification</h5>
+                            <p class="text-muted small mb-0">Instantly flag empty classrooms where lighting equipment remains powered unnecessarily.</p>
+                        </div>
+                    </div>
+                    <!-- Objective Card 4 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="custom-card text-center">
+                            <div class="icon-box mx-auto"><i class="fa-solid fa-leaf"></i></div>
+                            <h5 class="fw-bold fs-6">Energy Reduction</h5>
+                            <p class="text-muted small mb-0">Cut overall school utility costs while advancing environmental sustainability goals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- core functions and mockup preview   -->
+        <section class="py-5 bg-white" id="features">
+            <div class="container py-4">
+                <div class="row align-items-center gy-5">
+                    <!-- system functionality left column -->
+                    <div class="col-lg-5">
+                        <h2 class="fw-bold mb-3 text-dark">Core System Functionalities</h2>
+                        <p class="text-muted mb-4">LightGuard bridges hardware sensor telemetry with simple administration controls for seamless facility management.</p>
+                        
+                        <!-- feature 1 -->
+                        <div class="d-flex mb-3">
+                            <div class="me-3 text-success fs-4"><i class="fa-solid fa-circle-check"></i></div>
+                            <div>
+                                <h6 class="fw-bold mb-1">LDR Brightness & Motion Tracking</h6>
+                                <p class="text-muted small mb-0">Accurate light sensors combined with motion inputs detect real room activity.</p>
+                            </div>
+                        </div>
+
+                        <!-- feature 2 -->
+                        <div class="d-flex mb-3">
+                            <div class="me-3 text-success fs-4"><i class="fa-solid fa-circle-check"></i></div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Smart Energy-Saving Alerts</h6>
+                                <p class="text-muted small mb-0">Automated alerts flag rooms that stay bright without occupants present.</p>
+                            </div>
+                        </div>
+
+                        <!-- feature 3 -->
+                        <div class="d-flex mb-3">
+                            <div class="me-3 text-success fs-4"><i class="fa-solid fa-circle-check"></i></div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Historical Data & Analytics</h6>
+                                <p class="text-muted small mb-0">Generate downloadable usage reports to analyze trends over weeks or months.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- dashboard mockup right column -->
+                    <div class="col-lg-7" id="dashboard">
+                        <div class="preview-section p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="fw-bold mb-0 text-dark"><i class="fa-solid fa-chart-line me-2 text-info"></i>Live Classroom Status</h5>
+                                <span class="badge bg-success">System Active</span>
+                            </div>
+
+                            <!--mockup dashboard table -->
+                            <div class="dashboard-mockup">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover mb-0 align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Room</th>
+                                                <th scope="col">Occupancy</th>
+                                                <th scope="col">Light Level (LDR)</th>
+                                                <th scope="col">Status Alert</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- occupied room -->
+                                            <tr>
+                                                <td class="fw-bold">Room 101</td>
+                                                <td><span class="status-badge-occupied"><i class="fa-solid fa-user me-1"></i>Occupied</span></td>
+                                                <td>480 Lux (Bright)</td>
+                                                <td><span class="badge bg-secondary">Normal</span></td>
+                                            </tr>
+                                            <!-- energy waste room-->
+                                            <tr>
+                                                <td class="fw-bold">Room 102</td>
+                                                <td><span class="status-badge-unoccupied"><i class="fa-solid fa-user-slash me-1"></i>Unoccupied</span></td>
+                                                <td>510 Lux (Bright)</td>
+                                                <td><span class="badge bg-danger"><i class="fa-solid fa-bell me-1"></i>Waste Alert</span></td>
+                                            </tr>
+                                            <!-- optimal unoccupied room -->
+                                            <tr>
+                                                <td class="fw-bold">Room 103</td>
+                                                <td><span class="status-badge-unoccupied"><i class="fa-solid fa-user-slash me-1"></i>Unoccupied</span></td>
+                                                <td>20 Lux (Dark)</td>
+                                                <td><span class="badge bg-success">Optimal</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <p class="text-muted small mt-3 mb-0 text-center"><i class="fa-solid fa-info-circle me-1"></i> Standard view available for logged-in authorized personnel.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- clients 3 columns  -->
+        <section class="py-5" id="target">
+            <div class="container py-4">
+                <!-- title of section -->
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold text-dark">Tailored for Educational Institutions</h2>
+                    <p class="text-muted">Built specifically for school ecosystems to streamline monitoring responsibilities</p>
+                </div>
+                
+                <!-- client row -->
+                <div class="row g-4">
+                    <!-- client 1 admin -->
+                    <div class="col-md-4">
+                        <div class="target-box">
+                            <h5 class="fw-bold"><i class="fa-solid fa-user-tie me-2 text-primary"></i>Administrators</h5>
+                            <p class="text-muted small mb-0 mt-2">Track macro-level power consumption metrics and review historical operational savings reports.</p>
+                        </div>
+                    </div>
+                    <!-- client 2 teachers -->
+                    <div class="col-md-4">
+                        <div class="target-box">
+                            <h5 class="fw-bold"><i class="fa-solid fa-chalkboard-user me-2 text-primary"></i>Teachers</h5>
+                            <p class="text-muted small mb-0 mt-2">Easily check room status remotely prior to class arrivals and ensure switches are cleared post-lecture.</p>
+                        </div>
+                    </div>
+                    <!-- client 3 faculty staff -->
+                    <div class="col-md-4">
+                        <div class="target-box">
+                            <h5 class="fw-bold"><i class="fa-solid fa-screwdriver-wrench me-2 text-primary"></i>Facility Staff</h5>
+                            <p class="text-muted small mb-0 mt-2">Receive automated flags indicating exact room locations where lights need manual intervention.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- footer -->
+    <footer>
+        <div class="container">
+            <div class="row gy-4 mb-4">
+                <!-- footer column 1 summary -->
+                <div class="col-lg-5">
+                    <h5 class="text-white fw-bold"><i class="fa-solid fa-lightbulb me-2 text-warning"></i>LightGuard</h5>
+                    <p class="small text-white mb-0">An IoT classroom monitoring system engineered to eliminate electrical waste in school facilities.</p>
+                </div>
+                <!-- footer column 2 quick links -->
+                <div class="col-lg-3">
+                    <h6 class="text-white fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#objectives">Objectives</a></li>
+                        <li class="mb-2"><a href="#features">Core Features</a></li>
+                        <li class="mb-2"><a href="#dashboard">Live Dashboard</a></li>
+                    </ul>
+                </div>
+                <!-- footer column 3 login portal -->
+                <div class="col-lg-4">
+                    <h6 class="text-white fw-bold mb-3">Login Portal</h6>
+                    <p class="small text-white">Authorized school staff can proceed to the login portal to view full controls.</p>
+                    <a href="login.html" class="btn btn-brand-primary btn-sm">Login Page</a>
+                </div>
+            </div>
+            
+            <hr class="border-secondary">
+            
+            <!-- bottom line copyright -->
+            <div class="text-center small">
+                <p class="mb-0">&copy; LightGuard Energy Systems. Built with Bootstrap 5.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- auto close menu after clicking buttons -->
+    <script>
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbarCollapse = document.getElementById('navmenu');
+                const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
