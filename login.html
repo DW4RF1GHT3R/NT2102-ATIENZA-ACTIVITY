@@ -76,7 +76,7 @@
 
         .input-field input {
             width: 100%;
-            padding: 12px 16px 12px 40px;
+            padding: 12px 42px 12px 40px;
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
@@ -112,6 +112,26 @@
             left: 14px;
             color: #dddddd;
             font-size: 15px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            display: grid;
+            place-items: center;
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .toggle-password:focus-visible {
+            outline: 2px solid #ffffff;
+            outline-offset: 2px;
+            border-radius: 4px;
         }
 
         /* submit button */
@@ -168,7 +188,7 @@
             }
             
             .input-field input {
-                padding: 10px 14px 10px 36px;
+                padding: 10px 42px 10px 36px;
             }
         }
     </style>
@@ -194,6 +214,9 @@
                 <div class="input-field">
                     <i class="fa-solid fa-lock"></i>
                     <input type="password" id="login-pass" name="login_pass" placeholder="Enter password" required>
+                    <button type="button" class="toggle-password" aria-label="Show password" title="Show password" aria-controls="login-pass">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
 
@@ -210,6 +233,18 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.21.0/dist/jquery.validate.min.js"></script>
     <script>
         $(function () {
+            $(".toggle-password").on("click", function () {
+                const input = document.getElementById(this.getAttribute("aria-controls"));
+                const isHidden = input.type === "password";
+                const label = isHidden ? "Hide password" : "Show password";
+
+                input.type = isHidden ? "text" : "password";
+                this.setAttribute("aria-label", label);
+                this.setAttribute("title", label);
+                this.querySelector("i").classList.toggle("fa-eye", !isHidden);
+                this.querySelector("i").classList.toggle("fa-eye-slash", isHidden);
+            });
+
             $("#login-form").validate({
                 rules: {
                     login_user: { 
@@ -239,7 +274,18 @@
                     error.appendTo(element.closest(".input-group"));
                 },
                 errorElement: "small",
-                errorClass: "validation-error"
+                errorClass: "validation-error",
+                submitHandler: function () {
+                    const username = $("#login-user").val().trim();
+                    const password = $("#login-pass").val();
+
+                    if (username === "lygus" && password === "zandar1kuwabara!") {
+                        window.location.href = "index.html";
+                    } else {
+                        alert("Invalid username or password.");
+                    }
+                    return false;
+                }
             });
         });
     </script>
